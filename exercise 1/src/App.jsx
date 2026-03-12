@@ -6,14 +6,15 @@ export default function App() {
   const getScoreBarStyle = () => {
     // 1- Compute width
   
-    const scoreWidth = `${score * 10 }%`
-    if ( scoreWidth > 10 ){
-      scoreWidth = `100%`;
-    }
+   
+   let scoreWidth = score >= 10 ? `100%` : `${score * 10 }%`
     
 
     // 2- Compute color (optional)
-    let scoreColor = `#f3bc47`;
+    let scoreColor = `rgb(${255 - (score * 25 )},${score * 25 },0)`;
+
+  
+
 
     // 3 - Return the style object
     return {
@@ -29,7 +30,9 @@ export default function App() {
 
         <small>Enter a score (0 to 10): </small>
         <input type="number" min="0" max="10" value={score} 
-         onChange={(e) => setScore(e.target.value)} ></input>
+         onChange={(e) => 
+        setScore(e.target.value) 
+         } ></input>
 
         <div className="score-bar">
           <div className="score-bar-value" style={getScoreBarStyle()}></div>
